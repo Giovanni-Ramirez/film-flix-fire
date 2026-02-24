@@ -1,0 +1,77 @@
+.hero {
+    position: relative;
+    top: -100px;
+    width: 100%;
+    height: calc(100vh);
+    background-color: rgba(255, 0, 0, 0);
+    display: flex;
+    align-items: center;
+}
+
+
+.hero__backdrop__img--container {
+    content: '';
+    width: 100%;
+    height: inherit;
+    object-fit: cover;
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+}
+
+.hero__backdrop__gradient {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    background: #000000;
+    background: linear-gradient(90deg,rgba(0, 0, 0, 1) 20%, rgba(255, 255, 255, 0) 100%);
+}
+
+.hero__backdrop__gradient--bottom {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    background: #000000;
+    background: linear-gradient(0deg,rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 20%);
+}
+
+.hero__backdrop__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero__movie--info {
+    max-width: 500px;
+    margin-left: 100px;
+}
+
+.hero__movie--title {
+    font-size: 50px;
+    margin: 8px 0;
+}
+
+.hero__movie--description {
+    margin: 8px 0 16px 0;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: white solid 2px;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    font-size: 16px;
+    margin-right: 8px;
+}
+
+.btn-white {
+    background-color: white;
+    color: black;
+}
