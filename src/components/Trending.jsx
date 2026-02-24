@@ -1,7 +1,7 @@
 import React from "react";
 import "../assets/css/trending.css";
 
-const Trending = (list , featuredMovie,  movieModalFunc) => {
+const Trending = ({list , featuredMovie,  movieModalFunc}) => {
 
 
   function shuffleArray(array) {
@@ -21,8 +21,8 @@ const Trending = (list , featuredMovie,  movieModalFunc) => {
 
     return shuffled;
   }
-  const shuffledArray = shuffleArray(list.list).slice(0, 6);
-  console.log(shuffledArray);
+  const movies = Array.isArray(list) ? list : [];
+  const shuffledArray = shuffleArray(movies).slice(0, 6);
 
 
   return (

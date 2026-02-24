@@ -47,7 +47,6 @@ const MovieHero = () => {
 
   const movieModalFunc = () => {
     console.log('clicked');
-    
   }
 
   return (
