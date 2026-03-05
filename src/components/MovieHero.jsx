@@ -8,6 +8,8 @@ const MovieHero = () => {
   const [movieList, setMovieList] = useState([]);
   const [featuredMovie, setFeaturedMovie] = useState({});
 	const [trendingMovies, setTrendingMovies] = useState([]);
+  const [movieModal, setMovieModal] = useState({});
+  const [modalState, setModalState] = useState(false)
 
   async function fetchPopularMovies() {
     const options = {
@@ -29,6 +31,10 @@ const MovieHero = () => {
     setMovieList(data.results);
   }
 
+  function toggleModalState() {
+    setModalState(!modalState);
+  }
+
   useEffect(() => {
     // console.log(movieList);
     const randomIndex = Math.floor(Math.random() * movieList.length);
@@ -45,8 +51,9 @@ const MovieHero = () => {
     fetchPopularMovies();
   }, []);
 
-  const movieModalFunc = () => {
-    console.log('clicked');
+  const movieModalFunc = (movie) => {
+    toggleModalState()
+    setMovieModal(movie)
   }
 
   return (
@@ -67,7 +74,7 @@ const MovieHero = () => {
             <p className="hero__movie--description">
 							{featuredMovie.overview}
             </p>
-            <button className="btn btn-white">Watch Now</button>
+            <button className="btn btn-white" onClick={() => movieModalFunc(featuredMovie)}>Watch Now</button>
             <button className="btn">Details</button>
           </div>
         </>
@@ -75,7 +82,11 @@ const MovieHero = () => {
         <h2>Loading</h2>
       )}
       <Trending list={trendingMovies} featuredMovie={featuredMovie} movieModalFunc={movieModalFunc}/>
-      <Modal></Modal>
+      {modalState ? (
+        <Modal movie={movieModal} toggleModalState={() => toggleModalState}/>
+      ):(
+        <></>
+      )}
     </div>
   );
 };
