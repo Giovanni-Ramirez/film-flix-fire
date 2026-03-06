@@ -6,6 +6,7 @@
     background-color: rgba(255, 0, 0, 0);
     display: flex;
     align-items: center;
+    z-index: 0;
 }
 
 
@@ -16,7 +17,7 @@
     object-fit: cover;
     position: absolute;
     top: 0px;
-    z-index: -1;
+    z-index: -7;
 }
 
 .hero__backdrop__gradient {
@@ -25,7 +26,7 @@
     height: 100%;
     position: absolute;
     top: 0;
-    z-index: 0;
+    z-index: -5;
     background: #000000;
     background: linear-gradient(90deg,rgba(0, 0, 0, 1) 20%, rgba(255, 255, 255, 0) 100%);
 }
@@ -50,6 +51,7 @@
 .hero__movie--info {
     max-width: 500px;
     margin-left: 100px;
+    z-index: 0;
 }
 
 .hero__movie--title {

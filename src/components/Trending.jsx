@@ -52,15 +52,6 @@ const Trending = ({ list, featuredMovie, movieModalFunc }) => {
         ) : (
           <h2>WE DON'T HAVE MOVIES</h2>
         )}
-        {/* {movies.map((movie) => (
-          <div onClick={() => movieModalFunc(movie)} className="movie__poster--card" key={movie.id}>
-            <img
-              className="movie__poster--img"
-              src={`https://image.tmdb.org/t/p/w600_and_h900_face${movie.poster_path}`}
-              alt=""
-            />
-          </div>
-        ))} */}
       </div>
     </div>
   );

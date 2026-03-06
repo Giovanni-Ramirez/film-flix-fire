@@ -75,7 +75,7 @@ const MovieHero = () => {
 							{featuredMovie.overview}
             </p>
             <button className="btn btn-white" onClick={() => movieModalFunc(featuredMovie)}>Watch Now</button>
-            <button className="btn">Details</button>
+            <button className="btn" onClick={() => movieModalFunc(featuredMovie)}>Details</button>
           </div>
         </>
 			) : (

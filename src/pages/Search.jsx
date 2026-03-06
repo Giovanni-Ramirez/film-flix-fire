@@ -1,13 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import '../assets/css/searchcss.css';
+import Modal from '../components/Modal';
 
 const Search = () => {
-	const [ movieResults, setMovieResults ] = useState(); 
+  const [searchInput, setSearchInput] = useState("");
+  const [movieResults, setMovieResults] = useState([]);
 
-	async function searchMovies() {
+  async function searchMovies(input) {
     const options = {
       method: "GET",
-      url: "https://api.themoviedb.org/3/search/movie?query=harry%potter&language=en-US&page=1&sort_by=popularity.desc",
+      url: `https://api.themoviedb.org/3/search/movie?query=${input}&language=en-US&page=1&sort_by=popularity.desc`,
       params: {
         language: "en-US",
         page: "1",
@@ -20,27 +23,26 @@ const Search = () => {
       },
     };
     const { data } = await axios.request(options);
-		setMovieResults(data.results)
+    console.log(data.results);
+    setMovieResults(data.results);
   }
 
-	function searchMovieFunc() {
-		const searchField = document.querySelector('#movie__search');
-		console.log(searchField.value);
+	function movieModalFunc(movie) {
+		console.log(movie);
 		
 	}
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    searchMovies(encodeURIComponent(event.target[0].value));
+  };
 
-	useEffect(() => {
-		searchMovies() 
-	}, [])
   return (
     <div>
-
-      <form>
-        <input id="movie__search" type="text" />
-        <button onClick={() => searchMovieFunc()}>Search</button>
+      <form onSubmit={handleSubmit}>
+        <input type="text" />
+        <button type="submit">Submit</button>
       </form>
-
       <div>
         <button className="btn">Action</button>
         <button className="btn">Comedy</button>
@@ -48,8 +50,26 @@ const Search = () => {
         <button className="btn">Thriller</button>
         <button className="btn">Thriller</button>
       </div>
-
-			<div className="movie__results"></div>
+      <div className="movie__results">
+        {movieResults ? (
+          movieResults.map((movie) => (
+            <div
+              
+              className="movie__poster--card"
+              key={movie.id}
+            >
+              <img
+                className="movie__poster--img"
+                src={`https://image.tmdb.org/t/p/w600_and_h900_face${movie.poster_path}`}
+                alt=""
+              />
+            </div>
+          ))
+        ) : (
+          <h1>false</h1>
+        )}
+      </div>
+      {/* <Modal /> */}
     </div>
   );
 };

@@ -8,7 +8,6 @@ const Modal = ({ movie, toggleModalState }) => {
   const [movieVideoId , setMovieVideoId] = useState([]);
 
 
-  // console.log(movie);
   const genres = [
     {
       id: 28,

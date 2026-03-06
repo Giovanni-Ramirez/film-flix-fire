@@ -1,13 +1,13 @@
 import React from 'react';
+import Nav from '../components/Nav';
 import MovieHero from '../components/MovieHero';
-
-
 
 const Home = () => {
   return (
-    <div>
+    <>
+      <Nav/>
       <MovieHero/>
-    </div>
+    </>
   )
 }
 
