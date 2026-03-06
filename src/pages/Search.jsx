@@ -1,11 +1,10 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../assets/css/searchcss.css";
 import Modal from "../components/Modal";
 import Nav from "../components/Nav";
 
 const Search = () => {
-  const [searchInput, setSearchInput] = useState("");
   const [movieResults, setMovieResults] = useState([]);
   const [movieModal, setMovieModal] = useState({});
   const [modalState, setModalState] = useState(false);
