@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import '../assets/css/searchcss.css';
-import Modal from '../components/Modal';
+import "../assets/css/searchcss.css";
+import Modal from "../components/Modal";
+import Nav from "../components/Nav";
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState("");
   const [movieResults, setMovieResults] = useState([]);
+  const [movieModal, setMovieModal] = useState({});
+  const [modalState, setModalState] = useState(false);
 
   async function searchMovies(input) {
     const options = {
@@ -23,14 +26,18 @@ const Search = () => {
       },
     };
     const { data } = await axios.request(options);
-    console.log(data.results);
+    // console.log(data.results);
     setMovieResults(data.results);
   }
 
-	function movieModalFunc(movie) {
-		console.log(movie);
-		
-	}
+  function movieModalFunc(movie) {
+    setMovieModal(movie);
+    toggleModalState();
+  }
+
+  function toggleModalState() {
+    setModalState(!modalState);
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,39 +45,44 @@ const Search = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" />
-        <button type="submit">Submit</button>
-      </form>
+    <>
+      <Nav />
       <div>
-        <button className="btn">Action</button>
-        <button className="btn">Comedy</button>
-        <button className="btn">Romance</button>
-        <button className="btn">Thriller</button>
-        <button className="btn">Thriller</button>
-      </div>
-      <div className="movie__results">
-        {movieResults ? (
-          movieResults.map((movie) => (
-            <div
-              
-              className="movie__poster--card"
-              key={movie.id}
-            >
-              <img
-                className="movie__poster--img"
-                src={`https://image.tmdb.org/t/p/w600_and_h900_face${movie.poster_path}`}
-                alt=""
-              />
-            </div>
-          ))
-        ) : (
-          <h1>false</h1>
+        <form onSubmit={handleSubmit}>
+          <input type="text" />
+          <button type="submit">Submit</button>
+        </form>
+        <div>
+          <button className="btn">Action</button>
+          <button className="btn">Comedy</button>
+          <button className="btn">Romance</button>
+          <button className="btn">Thriller</button>
+          <button className="btn">Thriller</button>
+        </div>
+        <div className="movie__results">
+          {movieResults ? (
+            movieResults.map((movie) => (
+              <div
+                onClick={() => movieModalFunc(movie)}
+                className="movie__poster--card"
+                key={movie.id}
+              >
+                <img
+                  className="movie__poster--img"
+                  src={`https://image.tmdb.org/t/p/w600_and_h900_face${movie.poster_path}`}
+                  alt=""
+                />
+              </div>
+            ))
+          ) : (
+            <h1>false</h1>
+          )}
+        </div>
+        {modalState && (
+          <Modal movie={movieModal} toggleModalState={toggleModalState} />
         )}
       </div>
-      {/* <Modal /> */}
-    </div>
+    </>
   );
 };
 

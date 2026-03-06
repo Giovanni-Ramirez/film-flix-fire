@@ -83,7 +83,7 @@ const MovieHero = () => {
       )}
       <Trending list={trendingMovies} featuredMovie={featuredMovie} movieModalFunc={movieModalFunc}/>
       {modalState ? (
-        <Modal movie={movieModal} toggleModalState={() => toggleModalState}/>
+        <Modal movie={movieModal} toggleModalState={toggleModalState}/>
       ):(
         <></>
       )}

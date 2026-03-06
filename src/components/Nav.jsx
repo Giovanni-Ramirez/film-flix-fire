@@ -13,9 +13,8 @@ const Nav = () => {
 				<div className="nav__links">
 					<Link to="/" className="nav__link">Home</Link>
 					<Link to="/search" className="nav__link">Movies</Link>
-					<a href="https://www.google.com/" className="nav__link no_cursor">Series</a>
+					<a href="/" className="nav__link no_cursor">Series</a>
 					<a href="/" className="nav__link no_cursor">Kids</a>
-					<button>test me</button>
 				</div>
 			</div>
 			<div>
