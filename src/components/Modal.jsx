@@ -8,41 +8,22 @@ const Modal = ({ movie, toggleModalState }) => {
   const [movieVideoId, setMovieVideoId] = useState(null);
 
   const genreMap = {
-  28: "Action",
-  12: "Adventure",
-  16: "Animation",
-  35: "Comedy",
-  80: "Crime",
-  18: "Drama",
-  10751: "Family",
-  14: "Fantasy",
-  36: "History",
-  27: "Horror",
-  9648: "Mystery",
-  10749: "Romance",
-  878: "Science Fiction",
-  53: "Thriller",
-};
+    28: "Action",
+    12: "Adventure",
+    16: "Animation",
+    35: "Comedy",
+    80: "Crime",
+    18: "Drama",
+    10751: "Family",
+    14: "Fantasy",
+    36: "History",
+    27: "Horror",
+    9648: "Mystery",
+    10749: "Romance",
+    878: "Science Fiction",
+    53: "Thriller",
+  };
 
-  async function fetchVideoId() {
-    const options = {
-      method: "GET",
-      url: `https://api.themoviedb.org/3/movie/${movie.id}/videos`,
-      params: {
-        language: "en-US",
-        page: "1",
-        region: "840",
-      },
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDNjYjY2OGIyZjU0ZDNkNTAzNWRkYzYyNGFiZjE4OCIsIm5iZiI6MTcxMjY5MDcxMC42NDMwMDAxLCJzdWIiOiI2NjE1OTYxNjNkNzQ1NDAxODUwOWI1YTYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.tTZlQPdTUI3RiVDr6hkSsp0LFLw_YB5wR65t83Fmv1k",
-      },
-    };
-
-    const { data } = await axios.request(options);
-    setTrailerArray(data.results);
-  }
 
   function findTrailerFromArray(arr) {
     const lowerCase = (obj) => obj.name?.toLowerCase() || "";
@@ -58,6 +39,25 @@ const Modal = ({ movie, toggleModalState }) => {
 
   useEffect(() => {
     if (movie?.id) {
+      async function fetchVideoId() {
+        const options = {
+          method: "GET",
+          url: `https://api.themoviedb.org/3/movie/${movie.id}/videos`,
+          params: {
+            language: "en-US",
+            page: "1",
+            region: "840",
+          },
+          headers: {
+            accept: "application/json",
+            Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDNjYjY2OGIyZjU0ZDNkNTAzNWRkYzYyNGFiZjE4OCIsIm5iZiI6MTcxMjY5MDcxMC42NDMwMDAxLCJzdWIiOiI2NjE1OTYxNjNkNzQ1NDAxODUwOWI1YTYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.tTZlQPdTUI3RiVDr6hkSsp0LFLw_YB5wR65t83Fmv1k",
+          },
+        };
+        
+        const { data } = await axios.request(options);
+        setTrailerArray(data.results);
+      }
       fetchVideoId();
     }
   }, [movie.id]);
@@ -81,7 +81,9 @@ const Modal = ({ movie, toggleModalState }) => {
         />
         <div className="modal__backdrop__img--grandient--left"></div>
         <div className="modal__backdrop__img--grandient--bottom"></div>
-        <button className="close__btn" onClick={toggleModalState}>X</button>
+        <button className="close__btn" onClick={toggleModalState}>
+          X
+        </button>
         <div className="movie__modal__info">
           <h2 className="movie__modal__title">{movie.original_title}</h2>
           <ul className="movie__modal__genre__list">
