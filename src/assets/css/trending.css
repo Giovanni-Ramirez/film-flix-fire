@@ -10,7 +10,7 @@
     content: '';
     width: 100%;
     position: absolute;
-    background-color: red;
+    background-color: rgb(61, 61, 61);
     box-shadow: 1px -300px 20px #28ad07;
 }
 
@@ -22,7 +22,7 @@
 
 .movie__poster--card {
     width: calc(100vw / 6);
-    background-color: red;
+    background-color: rgb(48, 48, 48);
     margin: 12px;
     border-radius: 14px;
     overflow: hidden;

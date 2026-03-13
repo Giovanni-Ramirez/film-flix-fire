@@ -38,6 +38,23 @@ const Search = () => {
     setModalState(!modalState);
   }
 
+  function sortMovies(event) {
+    const value = event.target.value;
+    if (movieResults.length > 0) {
+      if (value === "new_to_old") {
+        const sorted = [...movieResults].sort(
+          (a, b) => new Date(b.release_date) - new Date(a.release_date),
+        );
+        setMovieResults(sorted);
+      } else {
+        const sorted = [...movieResults].sort(
+          (a, b) => new Date(a.release_date) - new Date(b.release_date),
+        );
+        setMovieResults(sorted);
+      }
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     searchMovies(encodeURIComponent(event.target[0].value));
@@ -47,17 +64,27 @@ const Search = () => {
     <>
       <Nav />
       <div>
-        <form onSubmit={handleSubmit}>
-          <input type="text" />
-          <button type="submit">Submit</button>
+        <form onSubmit={handleSubmit} className="search__container">
+          <div className="search__bar">
+            <input type="text" />
+            <button className="btn" type="submit">Submit</button>
+          </div>
+          <div>
+            <label htmlFor="sort">Sort By:</label>
+            <select name="sort by" id="sort_by" onChange={sortMovies}>
+              <option value="">--Please select an option--</option>
+              <option value="old_to_new">Date: Old to New</option>
+              <option value="new_to_old">Date: New to Old</option>
+            </select>
+          </div>
         </form>
-        <div>
+        {/* <div>
           <button className="btn">Action</button>
           <button className="btn">Comedy</button>
           <button className="btn">Romance</button>
           <button className="btn">Thriller</button>
           <button className="btn">Thriller</button>
-        </div>
+        </div> */}
         <div className="movie__results">
           {movieResults ? (
             movieResults.map((movie) => (
@@ -69,7 +96,7 @@ const Search = () => {
                 <img
                   className="movie__poster--img"
                   src={`https://image.tmdb.org/t/p/w600_and_h900_face${movie.poster_path}`}
-                  alt=""
+                  alt={movie.title}
                 />
               </div>
             ))

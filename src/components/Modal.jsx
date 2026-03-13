@@ -60,10 +60,12 @@ const Modal = ({ movie, toggleModalState }) => {
     if (movie?.id) {
       fetchVideoId();
     }
-  });
+  }, [movie.id]);
 
   useEffect(() => {
-    findTrailerFromArray(trailersArray);
+    if (trailersArray.length > 0) {
+      findTrailerFromArray(trailersArray);
+    }
   }, [trailersArray]);
 
   return (
